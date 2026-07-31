@@ -4,7 +4,7 @@
 
 Сделано на примере недвижимости, но приём работает для любого продукта: товар поворачивается, механизм собирается, процесс идёт вперёд и назад под пальцем.
 
-**[Живое демо](https://YOUR-USERNAME.github.io/REPO-NAME/)** · [Как это сделано (YouTube)](https://youtu.be/GpFgAlpx9_s)
+**[Живое демо](https://ghostoman.github.io/scroll-video-landing/)** · [Как это сделано (YouTube)](https://youtu.be/GpFgAlpx9_s)
 
 ![Скриншот](docs/screenshot.jpg)
 
