@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Золотые Кроны — таунхаус 120 м²</title>
+<meta name="description" content="Новый двухэтажный таунхаус 120 м² с собственным двором. Три спальни, тёплый пол, все коммуникации подключены.">
+<meta property="og:title" content="Золотые Кроны — таунхаус 120 м²">
+<meta property="og:description" content="Два этажа, три спальни и собственный двор. Всё уже подключено.">
+<meta property="og:image" content="video/fasad.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08090b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 30'%3E%3Cpath d='M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z' stroke='%23ffc544' stroke-width='2.4' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="video/fasad.jpg">
+<link rel="preload" as="video" href="video/scroll.mp4" type="video/mp4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@200;300;400;500&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* тьма */
+  --ink:#08090b;
+  --coal:#0e1013;
+  --smoke:#15181d;
+  /* свет */
+  --cream:#f2ede3;
+  --mute:#c3bcae;
+  --dim:#8a8377;
+  /* золото */
+  --gold:#ffc544;
+  --gold-lt:#ffe9a8;
+  --gold-dk:#b8862a;
+  --gold-line:rgba(255,197,68,.22);
+  --gold-glow:rgba(255,197,68,.14);
+  --gold-grad:linear-gradient(135deg,#ffeeb8 0%,#ffc544 44%,#b8862a 100%);
+
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --hand:'Caveat','Segoe Script','Bradley Hand',cursive;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,.05,.36,1);
+}
+
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{
+  margin:0; background:var(--ink); color:var(--cream);
+  font-family:var(--sans); font-size:16px; line-height:1.6; font-weight:300;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--gold);color:var(--ink)}
+:focus-visible{outline:1px solid var(--gold);outline-offset:6px}
+img{display:block; max-width:100%}
+
+/* ═══════════ ФОНОВОЕ ВИДЕО — ПРОКРУЧИВАЕТСЯ СКРОЛЛОМ ═══════════
+   Пока видео грузится, на фоне стоит фото фасада — никакого чёрного экрана. */
+.stage{
+  position:fixed; inset:0; z-index:0; overflow:hidden;
+  background:#0b0d10 url("video/fasad.jpg") center/cover no-repeat;
+}
+.stage video{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transform:scale(1.05); will-change:transform;
+}
+.stage::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(120% 78% at 50% 44%, rgba(8,9,11,0) 0%, rgba(8,9,11,.34) 58%, rgba(8,9,11,.72) 100%),
+    linear-gradient(180deg, rgba(8,9,11,.44) 0%, rgba(8,9,11,.18) 34%, rgba(8,9,11,.62) 100%);
+}
+
+/* зерно — без mix-blend-mode: режим наложения на весь экран
+   заставляет браузер пересобирать картинку каждый кадр и режет частоту вдвое */
+.grain{
+  position:fixed; inset:-60px; z-index:8; pointer-events:none;
+  opacity:.055; will-change:transform;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  animation:grain 8s steps(7) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}     14%{transform:translate(-16px,10px)}
+  28%{transform:translate(12px,-14px)} 42%{transform:translate(-10px,14px)}
+  57%{transform:translate(15px,8px)}  71%{transform:translate(-14px,-11px)}
+  85%{transform:translate(9px,13px)}  100%{transform:translate(0,0)}
+}
+
+/* ═══════════ ЗАСТАВКА ═══════════ */
+.intro-lock{position:fixed; inset:0; z-index:20; pointer-events:none}
+.intro-mark{
+  position:absolute; left:50%; top:6vh; transform:translateX(-50%);
+  text-align:center; opacity:0; transition:opacity 1.4s var(--ease);
+}
+/* знак появляется сразу, не дожидаясь видео — иначе на тяжёлом
+   файле человек несколько секунд смотрит в пустой чёрный экран */
+.booted .intro-mark{opacity:1}
+.unlocked .intro-mark{opacity:0; transition:opacity .9s var(--ease)}
+.intro-mark .crown{margin:0 auto 16px; display:block}
+.intro-mark b{
+  display:block; font-family:var(--serif); font-weight:400;
+  font-size:clamp(22px,3.4vw,34px); letter-spacing:.18em;
+  text-transform:uppercase; background:var(--gold-grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.intro-mark i{
+  display:block; margin-top:12px; font-style:normal; font-family:var(--mono);
+  font-size:10px; letter-spacing:.42em; text-transform:uppercase; color:var(--dim);
+}
+/* тонкая полоска отсчёта заставки */
+.intro-bar{
+  position:absolute; left:50%; bottom:64px; transform:translateX(-50%);
+  width:180px; height:1px; background:rgba(242,237,227,.12); overflow:hidden;
+}
+.intro-bar i{
+  position:absolute; inset:0; transform-origin:0 50%; transform:scaleX(0);
+  background:var(--gold-grad); display:block;
+}
+.playing .intro-bar i{transform:scaleX(1); transition:transform 4s linear}
+.unlocked .intro-bar{opacity:0; transition:opacity .6s var(--ease)}
+
+/* ═══════════ БОКОВАЯ ШКАЛА ═══════════ */
+.rail{
+  position:fixed; right:34px; top:50%; transform:translateY(-50%);
+  z-index:7; display:flex; flex-direction:column; gap:18px;
+  opacity:0; pointer-events:none; transition:opacity 1.2s var(--ease);
+}
+.unlocked .rail{opacity:1; pointer-events:auto}
+.rail a{
+  display:flex; align-items:center; gap:12px; justify-content:flex-end;
+  text-decoration:none; color:var(--dim);
+  font-family:var(--mono); font-size:9px; letter-spacing:.2em; text-transform:uppercase;
+  transition:color .5s var(--ease);
+}
+.rail a span{opacity:0; transform:translateX(6px); transition:opacity .5s var(--ease), transform .5s var(--ease)}
+.rail a i{width:18px; height:1px; background:currentColor; transition:width .5s var(--ease)}
+.rail a:hover,.rail a.on{color:var(--gold)}
+.rail a:hover span,.rail a.on span{opacity:1; transform:none}
+.rail a.on i{width:34px}
+
+/* прогресс */
+.prog{position:fixed; left:0; top:0; height:2px; width:100%; z-index:9;
+  background:var(--gold-grad); transform:scaleX(0); transform-origin:0 50%; opacity:.9}
+
+/* ═══════════ ОБЁРТКА ═══════════ */
+.page{position:fixed; top:0; left:0; width:100%; z-index:1; will-change:transform}
+body.native .page{position:static; transform:none !important}
+
+/* ═══════════ ОБЩЕЕ ═══════════ */
+.sec{position:relative; padding:15vh 28px}
+.wrap{max-width:1180px; margin:0 auto}
+.narrow{max-width:660px; margin:0 auto}
+
+/* гигантские номера разделов в фоне — редакционный приём */
+.sec[data-num]::before{
+  content:attr(data-num);
+  position:absolute; right:3vw; top:6vh; z-index:-1;
+  font-family:var(--serif); font-size:clamp(120px,20vw,300px); line-height:.8;
+  font-weight:400; color:transparent; pointer-events:none;
+  -webkit-text-stroke:1px rgba(255,197,68,.11);
+  text-stroke:1px rgba(255,197,68,.11);
+}
+
+.kicker{
+  font-family:var(--mono); font-size:10px; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 26px;
+  display:flex; align-items:center; gap:16px;
+}
+.kicker::after{content:""; flex:1; height:1px; background:var(--gold-line)}
+.kicker--mid{justify-content:center}
+.kicker--mid::before{content:""; flex:1; height:1px; background:var(--gold-line)}
+
+h2{
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(30px,4.6vw,60px); line-height:1.1; letter-spacing:-.01em;
+  margin:0 0 28px; color:var(--cream);
+}
+h2 em{font-style:italic; background:var(--gold-grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+
+.lead{font-size:clamp(18px,2.1vw,23px); line-height:1.5; font-weight:200; color:var(--cream); margin:0 0 24px}
+.body{font-size:16px; line-height:1.75; color:var(--cream); margin:0 0 20px}
+.hand{
+  font-family:var(--hand); font-size:clamp(26px,3.4vw,40px); line-height:1.25;
+  color:var(--gold); transform:rotate(-1.6deg); display:inline-block;
+}
+
+/* маска строк */
+.mask{overflow:hidden; display:block}
+.mask > span{display:block; transform:translateY(110%); transition:transform 1.2s var(--ease)}
+.seen .mask > span, .mask.seen > span{transform:none}
+.seen .mask:nth-child(2) > span{transition-delay:.09s}
+.seen .mask:nth-child(3) > span{transition-delay:.18s}
+.seen .mask:nth-child(4) > span{transition-delay:.27s}
+
+.rise{opacity:0; transform:translateY(calc(34px + var(--py,0px))); transition:opacity 1.2s var(--ease), transform 1.2s var(--ease)}
+.rise.seen{opacity:1; transform:translateY(var(--py,0px))}
+.stag > *{opacity:0; transform:translateY(calc(28px + var(--py,0px))); transition:opacity 1s var(--ease), transform 1s var(--ease)}
+.stag.seen > *{opacity:1; transform:translateY(var(--py,0px))}
+/* Когда появление отыграло, переход на transform снимается.
+   Иначе параллакс прогоняется через ту же секундную кривую: слои тащатся
+   с запозданием и при остановке скролла доезжают рывком на место. */
+.rise.done, .stag.done > *{transition:opacity .4s linear}
+.stag.seen > *:nth-child(2){transition-delay:.08s}
+.stag.seen > *:nth-child(3){transition-delay:.16s}
+.stag.seen > *:nth-child(4){transition-delay:.24s}
+.stag.seen > *:nth-child(5){transition-delay:.32s}
+.stag.seen > *:nth-child(6){transition-delay:.40s}
+
+/* Элементы с data-par едут со своей скоростью — через переменную --py,
+   чтобы параллакс не дрался с анимацией появления, а складывался с ней. */
+[data-par]{will-change:transform}
+[data-par]:not(.rise):not(.stag > *){transform:translateY(var(--py,0px))}
+.grid [data-par]{transform:translateY(var(--py,0px))}
+
+/* ═══════════ ЭКРАН 1 ═══════════ */
+.hero{position:relative; min-height:100svh; display:flex; align-items:center; padding:0 28px}
+.hero .wrap{width:100%}
+.hero h1{
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(40px,8.4vw,116px); line-height:.98; letter-spacing:-.025em;
+  margin:0; color:var(--cream);
+}
+.hero h1 em{font-style:italic; background:var(--gold-grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:34px; margin-top:44px;
+  padding-top:26px; border-top:1px solid var(--gold-line);
+}
+.hero-meta div b{
+  display:block; font-family:var(--serif); font-size:26px; font-weight:400; color:var(--gold);
+}
+.hero-meta div span{
+  display:block; margin-top:4px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--dim);
+}
+.hero-note{position:absolute; right:34px; bottom:16vh; max-width:230px; text-align:right}
+
+/* ═══════════ БЕГУЩАЯ СТРОКА ═══════════ */
+.strip{
+  position:relative; padding:26px 0; overflow:hidden;
+  border-top:1px solid var(--gold-line); border-bottom:1px solid var(--gold-line);
+  background:rgba(8,9,11,.72);
+}
+.strip-run{display:flex; width:max-content; animation:run 44s linear infinite}
+.strip-run span{
+  font-family:var(--serif); font-style:italic; font-size:clamp(18px,2.4vw,30px);
+  color:var(--gold); padding:0 30px; white-space:nowrap; opacity:.85;
+}
+.strip-run i{align-self:center; width:5px; height:5px; border-radius:50%; background:var(--gold-dk)}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* ═══════════ ЦИФРЫ ═══════════ */
+.nums{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gold-line)}
+.num{background:rgba(14,16,19,.9); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); padding:52px 22px; text-align:center}
+.num b{
+  display:block; font-family:var(--serif); font-weight:400;
+  font-size:clamp(40px,5.4vw,68px); line-height:1;
+  background:var(--gold-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-variant-numeric:tabular-nums;
+}
+.num span{display:block; margin-top:14px; font-family:var(--mono); font-size:11px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--cream)}
+
+/* ═══════════ ГАЛЕРЕЯ ═══════════ */
+.grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px}
+.card{position:relative; overflow:hidden; background:var(--smoke); cursor:zoom-in}
+.card::before{
+  content:"⇲"; position:absolute; right:14px; top:12px; z-index:2;
+  font-size:15px; color:var(--cream); opacity:0;
+  transition:opacity .5s var(--ease); text-shadow:0 2px 10px rgba(0,0,0,.9);
+}
+.card:hover::before{opacity:.85}
+.card img{width:100%; height:100%; object-fit:cover;
+  transition:transform 1.6s var(--ease), filter 1.6s var(--ease), clip-path 1.5s var(--ease);
+  filter:saturate(.9) brightness(.9);
+  clip-path:inset(0 0 100% 0);
+}
+.stag.seen .card img, .card.seen img{clip-path:inset(0 0 0 0)}
+.card:hover img{transform:scale(1.06); filter:saturate(1.05) brightness(1.03)}
+.card figcaption{
+  position:absolute; left:20px; bottom:18px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--cream);
+  text-shadow:0 2px 16px rgba(0,0,0,.9);
+}
+.card::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  border:1px solid var(--gold-line);
+}
+.c-a{grid-column:span 7; aspect-ratio:16/10}
+.c-b{grid-column:span 5; aspect-ratio:4/5}
+.c-c{grid-column:span 4; aspect-ratio:1/1}
+.c-d{grid-column:span 4; aspect-ratio:1/1}
+.c-e{grid-column:span 4; aspect-ratio:1/1}
+
+/* ═══════════ КОМНАТЫ ═══════════ */
+.rooms{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--gold-line)}
+.rm{background:rgba(14,16,19,.9); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); padding:40px 34px;
+  transition:background .6s var(--ease)}
+.rm:hover{background:rgba(24,28,34,.95)}
+.rm em{font-style:normal; font-family:var(--serif); font-size:22px; color:var(--gold-dk); display:block; margin-bottom:16px}
+.rm b{display:block; font-family:var(--serif); font-weight:400; font-size:24px; line-height:1.25; color:var(--cream); margin-bottom:12px}
+.rm span{display:block; font-size:15px; line-height:1.7; color:var(--cream)}
+
+/* ═══════════ ДЕНЬ (закреплённая колонка) ═══════════ */
+.day-wrap{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:start}
+.day-stick{position:sticky; top:24vh}
+.hours{margin:0}
+.hr{display:grid; grid-template-columns:92px 1fr; gap:28px; padding:32px 0; border-bottom:1px solid var(--gold-line)}
+.hr:first-child{border-top:1px solid var(--gold-line)}
+.hr dt{margin:0; font-family:var(--serif); font-size:26px; color:var(--gold)}
+.hr dd{margin:0; font-size:16px; line-height:1.7; color:var(--cream)}
+.hr dd b{color:var(--gold-lt); font-weight:400}
+
+/* ═══════════ ПАСПОРТ ═══════════ */
+.spec{margin:0; border-top:1px solid var(--gold-line)}
+.sp{display:grid; grid-template-columns:250px 1fr; gap:34px; padding:24px 14px;
+  border-bottom:1px solid var(--gold-line);
+  transition:background .5s var(--ease), padding-left .5s var(--ease)}
+.sp:hover{background:rgba(255,197,68,.05); padding-left:26px}
+.sp dt{margin:0; font-family:var(--mono); font-size:9px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--gold); padding-top:5px}
+.sp dd{margin:0; font-size:16px; line-height:1.65; color:var(--cream)}
+
+/* ═══════════ ПОЧЕМУ СЕЙЧАС ═══════════ */
+.why{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--gold-line)}
+.wh{background:rgba(14,16,19,.9); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); padding:44px 32px}
+.wh b{display:block; font-family:var(--serif); font-size:21px; font-weight:400; color:var(--cream); margin-bottom:14px}
+.wh span{display:block; font-size:15px; line-height:1.7; color:var(--cream)}
+
+/* ═══════════ ЦЕНА ═══════════ */
+.price-box{text-align:center; padding:14vh 0}
+.price{
+  position:relative; display:inline-block;
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(52px,11vw,146px); line-height:.94; letter-spacing:-.03em;
+  background:var(--gold-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+  margin:0; font-variant-numeric:tabular-nums;
+}
+/* блик по золоту проходит один раз, когда цена появляется */
+.price::after{
+  content:attr(data-v); position:absolute; inset:0;
+  background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:280% 100%; background-position:180% 0;
+}
+.seen .price::after{transition:background-position 1.9s var(--ease) .5s; background-position:-90% 0}
+.price-sub{font-family:var(--mono); font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--dim); margin:26px 0 0}
+.cta{
+  display:inline-block; margin-top:56px; position:relative;
+  font-family:var(--sans); font-size:14px; font-weight:400; letter-spacing:.16em;
+  text-transform:uppercase; text-decoration:none; color:var(--ink);
+  padding:22px 56px; border-radius:999px; background:var(--gold-grad);
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+  will-change:transform;
+}
+.cta:hover{box-shadow:0 0 60px var(--gold-glow)}
+.ghost{
+  display:inline-block; margin-top:18px; font-size:14px; letter-spacing:.1em;
+  text-decoration:none; color:var(--mute); padding:18px 34px; border-radius:999px;
+  border:1px solid var(--gold-line); transition:color .5s var(--ease), border-color .5s var(--ease);
+}
+.ghost:hover{color:var(--gold); border-color:var(--gold)}
+.fine{font-family:var(--mono); font-size:9px; letter-spacing:.14em; color:var(--dim); margin:36px 0 0}
+
+/* ═══════════ ЗАЯВКА ═══════════ */
+.modal{
+  position:fixed; inset:0; z-index:30; display:grid; place-items:center;
+  padding:24px; opacity:0; pointer-events:none;
+  transition:opacity .6s var(--ease);
+}
+.modal.open{opacity:1; pointer-events:auto}
+.modal-bg{position:absolute; inset:0; background:rgba(4,5,6,.93); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px)}
+.modal-box{
+  position:relative; width:100%; max-width:520px;
+  background:var(--coal); border:1px solid var(--gold-line);
+  padding:52px 46px; text-align:center;
+  transform:translateY(24px) scale(.97);
+  transition:transform .7s var(--ease);
+  max-height:90vh; overflow-y:auto;
+}
+.modal.open .modal-box{transform:none}
+.modal-box h3{
+  font-family:var(--serif); font-weight:400; font-size:32px; line-height:1.2;
+  margin:0 0 12px; color:var(--cream);
+}
+.modal-box h3 em{font-style:italic; background:var(--gold-grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.modal-box .sub{font-size:15px; color:var(--cream); margin:0 0 34px}
+.field{text-align:left; margin-bottom:20px}
+.field label{
+  display:block; font-family:var(--mono); font-size:9px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:9px;
+}
+.field input,.field select{
+  width:100%; background:transparent; color:var(--cream);
+  border:0; border-bottom:1px solid var(--gold-line);
+  padding:11px 2px; font-family:var(--sans); font-size:16px; font-weight:300;
+  transition:border-color .4s var(--ease);
+}
+.field input:focus,.field select:focus{outline:none; border-bottom-color:var(--gold)}
+.field input::placeholder{color:var(--dim)}
+.field select option{background:var(--coal); color:var(--cream)}
+.modal .cta{margin-top:22px; width:100%; text-align:center; padding:20px 24px; border:0; cursor:pointer}
+.modal-close{
+  position:absolute; top:16px; right:18px; width:38px; height:38px;
+  background:none; border:0; color:var(--dim); font-size:24px; line-height:1;
+  cursor:pointer; transition:color .4s var(--ease);
+}
+.modal-close:hover{color:var(--gold)}
+.modal-fine{font-family:var(--mono); font-size:9px; letter-spacing:.12em;
+  color:var(--dim); margin:22px 0 0; line-height:1.7}
+.thanks{display:none}
+.modal.done .form-part{display:none}
+.modal.done .thanks{display:block}
+.thanks .crown{margin:0 auto 22px; display:block}
+
+/* ═══════════ ФОТО ВО ВЕСЬ ЭКРАН ═══════════ */
+.lightbox{
+  position:fixed; inset:0; z-index:40; display:grid; place-items:center;
+  padding:40px 24px; opacity:0; pointer-events:none;
+  background:rgba(3,4,5,.97); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  transition:opacity .5s var(--ease);
+}
+.lightbox.open{opacity:1; pointer-events:auto}
+.lightbox img{
+  max-width:100%; max-height:82vh; object-fit:contain;
+  border:1px solid var(--gold-line);
+  transform:scale(.96); transition:transform .6s var(--ease);
+}
+.lightbox.open img{transform:none}
+.lb-cap{
+  position:absolute; left:50%; bottom:5vh; transform:translateX(-50%);
+  font-family:var(--mono); font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--gold); white-space:nowrap;
+}
+.lb-close{
+  position:absolute; top:22px; right:26px; width:44px; height:44px;
+  background:none; border:0; color:var(--cream); font-size:30px; line-height:1;
+  cursor:pointer; transition:color .4s var(--ease);
+}
+.lb-close:hover{color:var(--gold)}
+.lb-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:56px; height:56px; background:none; border:1px solid var(--gold-line);
+  border-radius:50%; color:var(--cream); font-size:20px; cursor:pointer;
+  transition:border-color .4s var(--ease), color .4s var(--ease);
+}
+.lb-nav:hover{border-color:var(--gold); color:var(--gold)}
+.lb-prev{left:3vw} .lb-next{right:3vw}
+@media(max-width:720px){ .lb-nav{display:none} }
+
+/* ═══════════ ВИДЕО О ДОМЕ ═══════════
+   Плеер не грузится сразу: его скрипты тяжёлые и отнимают кадры
+   у скролл-видео. Показываем обложку, по клику — настоящий плеер. */
+.tube{
+  position:relative; aspect-ratio:16/9; overflow:hidden;
+  border:1px solid var(--gold-line); background:var(--smoke);
+}
+.tube iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.tube-face{
+  position:absolute; inset:0; width:100%; padding:0; border:0; cursor:pointer;
+  background:#0e1013 center/cover no-repeat; display:block;
+}
+.tube-face::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(8,9,11,.25) 0%, rgba(8,9,11,.6) 100%);
+}
+.tube-play{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:88px; height:88px; border-radius:50%; z-index:2;
+  background:rgba(8,9,11,.55); border:1px solid var(--gold);
+  display:grid; place-items:center;
+  transition:background .45s var(--ease), transform .45s var(--ease);
+}
+.tube-face:hover .tube-play{background:var(--gold); transform:translate(-50%,-50%) scale(1.06)}
+.tube-play svg{margin-left:5px; transition:fill .45s var(--ease)}
+.tube-face:hover .tube-play svg{fill:#0e1013}
+.tube-label{
+  position:absolute; left:0; right:0; bottom:26px; z-index:2; text-align:center;
+  font-family:var(--mono); font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--cream);
+}
+
+/* ═══════════ КОНТАКТЫ АВТОРА ═══════════ */
+.author{
+  border-top:1px solid var(--gold-line); border-bottom:1px solid var(--gold-line);
+  background:rgba(8,9,11,.9); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+  padding:9vh 28px; text-align:center;
+}
+.author h3{
+  font-family:var(--serif); font-weight:400; font-size:clamp(24px,3.4vw,38px);
+  line-height:1.24; margin:0 0 16px; color:var(--cream);
+}
+.author h3 em{font-style:italic; background:var(--gold-grad);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.author p{font-size:16px; line-height:1.7; color:var(--cream);
+  max-width:520px; margin:0 auto 34px}
+.author-links{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.author-links a{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--sans); font-size:15px; text-decoration:none; color:var(--cream);
+  border:1px solid var(--gold-line); border-radius:999px; padding:15px 30px;
+  transition:border-color .45s var(--ease), color .45s var(--ease), background .45s var(--ease);
+}
+.author-links a:hover{border-color:var(--gold); color:var(--gold); background:rgba(255,197,68,.06)}
+.author-links svg{flex:0 0 auto}
+
+/* ═══════════ ПОДВАЛ ═══════════ */
+.foot{padding:9vh 28px 12vh; border-top:1px solid var(--gold-line);
+  background:rgba(8,9,11,.9); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); text-align:center}
+.foot .crown{margin:0 auto 20px; display:block}
+.foot p{font-family:var(--mono); font-size:9px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--dim); margin:0 0 10px}
+
+/* ═══════════ АДАПТИВ ═══════════ */
+@media(max-width:1024px){
+  .rail{display:none}
+  .day-wrap{grid-template-columns:1fr; gap:40px}
+  .day-stick{position:static}
+  .hero-note{display:none}
+}
+@media(max-width:860px){
+  .sp{grid-template-columns:1fr; gap:8px}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .rooms,.why{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .c-a,.c-b,.c-c,.c-d,.c-e{grid-column:span 2; aspect-ratio:16/10}
+  .sec{padding:11vh 20px}
+  .hr{grid-template-columns:66px 1fr; gap:18px}
+  .modal-box{padding:40px 26px}
+  .modal-box h3{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){
+  .rise,.stag > *{opacity:1 !important; transform:none !important}
+  [data-par]{transform:none !important}
+  .mask > span{transform:none !important}
+  .card img{clip-path:none !important}
+  .grain,.strip-run{animation:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- фон: прокручивается скроллом -->
+<div class="stage">
+  <video id="film" muted playsinline preload="auto" poster="video/fasad.jpg">
+    <source src="video/scroll.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="prog" id="prog" aria-hidden="true"></div>
+
+<!-- заставка -->
+<div class="intro-lock" id="introLock" aria-hidden="true">
+  <div class="intro-mark">
+    <svg class="crown" width="46" height="30" viewBox="0 0 46 30" fill="none">
+      <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#ffc544" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+    <b>Золотые Кроны</b>
+    <i>Резиденция · 120 м²</i>
+  </div>
+  <div class="intro-bar"><i></i></div>
+</div>
+
+<!-- боковая шкала -->
+<nav class="rail" id="rail" aria-label="Разделы">
+  <a href="#s1"><span>Дом</span><i></i></a>
+  <a href="#s2"><span>Цифры</span><i></i></a>
+  <a href="#s3"><span>Внутри</span><i></i></a>
+  <a href="#s8"><span>Видео</span><i></i></a>
+  <a href="#s4"><span>Планировка</span><i></i></a>
+  <a href="#s5"><span>День</span><i></i></a>
+  <a href="#s6"><span>Стройка</span><i></i></a>
+  <a href="#s7"><span>Цена</span><i></i></a>
+</nav>
+
+<div class="page" id="page">
+
+  <!-- ЭКРАН 1 -->
+  <header class="hero" id="s1">
+    <div class="wrap">
+      <p class="kicker rise">Таунхаус · сдан в 2024 · первый владелец</p>
+      <h1>
+        <span class="mask"><span>Дом, который</span></span>
+        <span class="mask"><span>вы себе</span></span>
+        <span class="mask"><span><em>обещали</em></span></span>
+      </h1>
+      <div class="hero-meta rise">
+        <div><b>120 м²</b><span>Площадь</span></div>
+        <div><b>2</b><span>Этажа</span></div>
+        <div><b>3</b><span>Спальни</span></div>
+        <div><b>1.7</b><span>Сотки двор</span></div>
+      </div>
+    </div>
+    <div class="hero-note rise" data-par="0.14">
+      <span class="hand">Листайте — дом<br>оживает сам</span>
+    </div>
+  </header>
+
+  <!-- БЕГУЩАЯ СТРОКА -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-run">
+      <span>Тёплый пол</span><i></i><span>Свой двор</span><i></i><span>Монолит</span><i></i>
+      <span>Оптоволокно</span><i></i><span>Два санузла</span><i></i><span>Терраса</span><i></i>
+      <span>Тёплый пол</span><i></i><span>Свой двор</span><i></i><span>Монолит</span><i></i>
+      <span>Оптоволокно</span><i></i><span>Два санузла</span><i></i><span>Терраса</span><i></i>
+    </div>
+  </div>
+
+  <!-- МАНИФЕСТ -->
+  <section class="sec">
+    <div class="narrow rise" data-par="0.07">
+      <p class="lead">Этот разговор с собой вы откладывали не раз. Сначала нужно было закрыть другие вопросы. Потом дождаться момента. Потом ещё немного накопить.</p>
+      <p class="body">Момент выглядит примерно так: новый дом, который построили не на продажу побыстрее, а так, как строят для себя. С монолитным фундаментом, который никто не увидит. С перекрытием, о котором вы вспомните только тогда, когда наверху уснёт ребёнок, а внизу будет идти фильм.</p>
+      <p style="margin-top:34px"><span class="hand">И всё это — уже готово</span></p>
+    </div>
+  </section>
+
+  <!-- ЦИФРЫ -->
+  <section class="sec" id="s2" data-num="01">
+    <div class="wrap">
+      <p class="kicker kicker--mid rise" data-par="0.05">Коротко</p>
+      <div class="nums stag" data-par="0.09">
+        <div class="num"><b data-n="120">0</b><span>м² площадь</span></div>
+        <div class="num"><b data-n="4">0</b><span>комнаты</span></div>
+        <div class="num"><b data-n="2">0</b><span>этажа</span></div>
+        <div class="num"><b data-n="1.7" data-d="1">0</b><span>сотки участок</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГАЛЕРЕЯ -->
+  <section class="sec" id="s3" data-num="02">
+    <div class="wrap">
+      <p class="kicker rise" data-par="0.04">Как это выглядит</p>
+      <h2 class="rise" data-par="0.08">Дом, <em>который уже стоит</em></h2>
+      <div class="grid stag" style="margin-top:52px">
+        <figure class="card c-a" data-par="0.05"><img src="video/fasad.jpg" alt="Фасад" loading="lazy"><figcaption>Фасад</figcaption></figure>
+        <figure class="card c-b" data-par="0.13"><img src="video/lesnitsa.jpg" alt="Лестница" loading="lazy"><figcaption>Лестница</figcaption></figure>
+        <figure class="card c-c" data-par="0.16"><img src="video/kuhnya.jpg" alt="Кухня-гостиная" loading="lazy"><figcaption>Кухня-гостиная</figcaption></figure>
+        <figure class="card c-d" data-par="0.06"><img src="video/spalna.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
+        <figure class="card c-e" data-par="0.18"><img src="video/terassa.jpg" alt="Терраса" loading="lazy"><figcaption>Терраса</figcaption></figure>
+      </div>
+      <p class="body rise" style="margin-top:26px; font-size:14px; color:var(--dim)">Нажмите на любое фото, чтобы открыть во весь экран</p>
+    </div>
+  </section>
+
+  <!-- ВИДЕО О ДОМЕ -->
+  <section class="sec" id="s8" data-num="03">
+    <div class="wrap">
+      <p class="kicker rise" data-par="0.04">Видео о доме</p>
+      <h2 class="rise" data-par="0.08">Посмотрите <em>за минуту</em></h2>
+      <div class="tube rise" data-par="0.10" style="margin-top:44px">
+        <button class="tube-face" id="tubeFace" type="button" aria-label="Смотреть видео о доме"
+                style="background-image:url('https://i.ytimg.com/vi/GpFgAlpx9_s/maxresdefault.jpg')">
+          <span class="tube-play">
+            <svg width="26" height="30" viewBox="0 0 24 28" fill="#ffc544" aria-hidden="true">
+              <path d="M2 2v24l20-12z"/>
+            </svg>
+          </span>
+          <span class="tube-label">Смотреть видео</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПЛАНИРОВКА -->
+  <section class="sec" id="s4" data-num="04">
+    <div class="wrap">
+      <p class="kicker rise" data-par="0.04">Планировка</p>
+      <h2 class="rise" data-par="0.08">Сто двадцать метров, <em>где нет лишних</em></h2>
+      <p class="body rise" style="max-width:560px">Ни одного коридора в никуда. Каждый метр из ста двадцати делает работу, за которую вы платите.</p>
+      <div class="rooms stag" style="margin-top:52px">
+        <div class="rm"><em>01</em><b>Три спальни</b><span>Две наверху и одна внизу — под кабинет, гостевую или комнату для родителей. Не придётся выбирать, кому тесниться.</span></div>
+        <div class="rm"><em>02</em><b>Два санузла</b><span>По одному на этаж. Утро перестаёт быть очередью, а гости — неудобством.</span></div>
+        <div class="rm"><em>03</em><b>Кухня-гостиная с террасой</b><span>Единое светлое пространство, которое летом просто продолжается во двор. Стол на двенадцать человек помещается.</span></div>
+        <div class="rm"><em>04</em><b>Кладовая</b><span>Отдельное помещение под велосипеды, мотоцикл, коляски и всё, чему не место в жилых комнатах.</span></div>
+        <div class="rm"><em>05</em><b>Свой двор 1.7 сотки</b><span>Приватизированный участок с забором по периметру. Мангал, качели, грядки — как решите.</span></div>
+        <div class="rm"><em>06</em><b>Монолитная лестница</b><span>Дизайнерская, железобетонная, ручной работы. Не времянка, которую через год меняют.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОДИН ДЕНЬ -->
+  <section class="sec" id="s5" data-num="05">
+    <div class="wrap day-wrap">
+      <div class="day-stick rise" data-par="0.06">
+        <p class="kicker">Один день</p>
+        <h2>Дом продают метрами.<br><em>Живут в нём иначе</em></h2>
+        <p style="margin-top:24px"><span class="hand">Представьте вторник</span></p>
+      </div>
+      <dl class="hours stag">
+        <div class="hr"><dt>07:20</dt><dd>Босиком по <b>тёплому полу</b> на кухню. Он смонтирован по всему первому этажу — вопрос тапочек зимой снимается навсегда.</dd></div>
+        <div class="hr"><dt>09:00</dt><dd>Работа из дальней комнаты. <b>Оптоволокно заведено в дом</b>, созвоны не рассыпаются, и никто не ходит через кадр.</dd></div>
+        <div class="hr"><dt>13:30</dt><dd>Обед на <b>террасе</b> с выходом прямо из кухни. Свой двор, забор по периметру, ни одного чужого окна напротив.</dd></div>
+        <div class="hr"><dt>19:00</dt><dd>Ужин на всех в <b>единой кухне-гостиной</b>, а не на шести метрах, где двое уже не расходятся.</dd></div>
+        <div class="hr"><dt>23:00</dt><dd>Наверху две спальни и свой санузел. <b>Монолитное перекрытие</b> — внизу можно досматривать фильм, никто не проснётся.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ПАСПОРТ -->
+  <section class="sec" id="s6" data-num="06">
+    <div class="wrap">
+      <p class="kicker rise" data-par="0.04">Как построен</p>
+      <h2 class="rise" data-par="0.08">То, что <em>не видно</em> на фотографиях</h2>
+      <p class="body rise" style="max-width:600px">Отделку можно переделать за месяц. Всё остальное переделать нельзя. Здесь это уже сделано — и сделано правильно.</p>
+      <dl class="spec rise" style="margin-top:52px">
+        <div class="sp"><dt>Фундамент</dt><dd>Ленточный монолитный, гидроизолирован и утеплён. Залита монолитная плита с коммуникациями.</dd></div>
+        <div class="sp"><dt>Стены</dt><dd>Красный кирпич с утеплением базальтовой ватой. Не газоблок, не каркас.</dd></div>
+        <div class="sp"><dt>Фасад</dt><dd>Окрашен системой Ceresit, силикон-силикат. Не выгорает и не требует ухода годами.</dd></div>
+        <div class="sp"><dt>Кровля</dt><dd>Современная ПВХ-мембрана, смонтирован водосток.</dd></div>
+        <div class="sp"><dt>Перекрытие</dt><dd>Монолитное железобетонное между первым и вторым этажом.</dd></div>
+        <div class="sp"><dt>Окна</dt><dd>Энергосберегающие, ламинированный профиль, защитное напыление на стёклах.</dd></div>
+        <div class="sp"><dt>Отопление</dt><dd>Индивидуальное. Двухконтурный газовый котёл установлен, тёплый пол смонтирован.</dd></div>
+        <div class="sp"><dt>Под отделку</dt><dd>Машинная штукатурка стен, электрика разведена по всему дому.</dd></div>
+        <div class="sp"><dt>Коммуникации</dt><dd>Газ · электрика 380 В · центральный водопровод · центральная канализация · оптоволокно</dd></div>
+        <div class="sp"><dt>Год</dt><dd>2024. Первый владелец — вы.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ПОЧЕМУ СЕЙЧАС -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="kicker kicker--mid rise" data-par="0.04">Три причины не откладывать</p>
+      <div class="why stag" data-par="0.09" style="margin-top:44px">
+        <div class="wh"><b>Чистый лист вместо чужого вкуса</b><span>Дом под чистовую отделку. Не придётся сдирать чужую плитку и жить внутри решений предыдущего хозяина. Вы доведёте его ровно до того вида, который представляли.</span></div>
+        <div class="wh"><b>Всё подключено</b><span>Газ, свет, вода, канализация, интернет — заведены и работают. Ни одного согласования, ни одной очереди, ни одного месяца ожидания.</span></div>
+        <div class="wh"><b>Документы готовы</b><span>Объект проверен, продажа напрямую от представителя застройщика. Сделка занимает дни, а не сезон.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦЕНА -->
+  <section class="sec" id="s7">
+    <div class="price-box narrow rise" data-par="0.11">
+      <p class="kicker kicker--mid">Цена</p>
+      <p class="price" data-v="$122 000">$122 000</p>
+      <p class="price-sub">$1 017 за м² · дом целиком, с участком</p>
+      <div style="margin-top:8px">
+        <a class="cta" id="magnet" href="#" data-open>Записаться на просмотр</a>
+      </div>
+      <div><a class="ghost" href="#" data-open>Задать вопрос</a></div>
+      <p class="fine">Показ по предварительной записи · объект проверен</p>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ АВТОРА САЙТА -->
+  <section class="author rise">
+    <h3>Нужен <em>такой же</em> сайт или видеореклама?</h3>
+    <p>Делаю сайты со скролл-видео и рекламные ролики под ключ — для недвижимости, товаров и услуг. Напишите, обсудим задачу.</p>
+    <div class="author-links">
+      <a href="https://t.me/ghostoman" target="_blank" rel="noreferrer">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.3-.5.5-1 .5l.3-4.7L18.2 6c.4-.3-.1-.5-.6-.2L6.9 12.6l-4.5-1.4c-1-.3-1-1 .2-1.4l17.6-6.8c.8-.3 1.5.2 1.2 1.3z"/>
+        </svg>
+        Телеграм @ghostoman
+      </a>
+      <a href="mailto:bannermru@gmail.com">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/>
+        </svg>
+        bannermru@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <svg class="crown" width="34" height="22" viewBox="0 0 46 30" fill="none">
+      <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#b8862a" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+    <p>Золотые Кроны · таунхаус 120 м²</p>
+    <p>Характеристики указаны по данным застройщика</p>
+  </footer>
+
+</div>
+
+<!-- ФОТО ВО ВЕСЬ ЭКРАН -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото" aria-hidden="true">
+  <button class="lb-close" type="button" data-lb-close aria-label="Закрыть">&times;</button>
+  <button class="lb-nav lb-prev" type="button" data-lb-prev aria-label="Предыдущее фото">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" type="button" data-lb-next aria-label="Следующее фото">&#8250;</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ЗАЯВКА -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="Закрыть">&times;</button>
+
+    <div class="form-part">
+      <h3 id="modalTitle">Посмотреть <em>вживую</em></h3>
+      <p class="sub">Оставьте контакты — свяжемся и подберём удобное время. Показ занимает около получаса.</p>
+      <div class="field">
+        <label for="fName">Как к вам обращаться</label>
+        <input id="fName" type="text" placeholder="Имя" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input id="fPhone" type="tel" placeholder="+__ ___ ___ __ __" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label for="fWhen">Когда удобно</label>
+        <select id="fWhen">
+          <option>В ближайшие дни</option>
+          <option>На выходных</option>
+          <option>Вечером после работы</option>
+          <option>Пока просто задать вопрос</option>
+        </select>
+      </div>
+      <button class="cta" type="button" id="formSend">Отправить заявку</button>
+      <p class="modal-fine">Перезвоним в течение дня. Никаких рассылок.</p>
+    </div>
+
+    <div class="thanks">
+      <svg class="crown" width="46" height="30" viewBox="0 0 46 30" fill="none">
+        <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#ffc544" stroke-width="1.2" stroke-linejoin="round"/>
+      </svg>
+      <h3>Заявка <em>принята</em></h3>
+      <p class="sub" style="margin-bottom:0">Свяжемся с вами в течение дня и договоримся о показе.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch  = matchMedia('(pointer: coarse)').matches;
+  var page   = document.getElementById('page');
+  var film   = document.getElementById('film');
+  var prog   = document.getElementById('prog');
+  var rail   = document.getElementById('rail');
+  var body   = document.body;
+
+  var INTRO_END = 4;           // секунда, на которой заставка замирает
+  var duration  = 0;
+  var unlocked  = false;
+
+  /* знак на чёрном — сразу, ещё до загрузки видео */
+  requestAnimationFrame(function(){ body.classList.add('booted'); });
+
+  /* ───── 1. Заставка: проигрываем до 4-й секунды и замираем ─────
+     Скролл доступен сразу. Если человек начал листать раньше —
+     заставка тут же заканчивается и управление переходит к нему.
+
+     Браузер при F5 восстанавливает позицию прокрутки и сразу шлёт scroll.
+     На странице с фиксированной обёрткой это ломает всю логику, поэтому
+     восстановление отключаем и всегда начинаем сверху. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  scrollTo(0, 0);
+
+  function unlock(){
+    /* Пауза ставится ВСЕГДА, даже если разблокировка уже была:
+       иначе видео, запущенное после первого вызова, играет само по себе. */
+    try { film.pause(); } catch(e){}
+    if (unlocked) return;
+    unlocked = true;
+    body.classList.add('unlocked');
+    measure();
+  }
+
+  ['wheel','touchstart','keydown','scroll'].forEach(function(ev){
+    addEventListener(ev, function once(){
+      removeEventListener(ev, once);
+      unlock();
+    }, { passive:true });
+  });
+
+  function startIntro(){
+    duration = film.duration || 0;
+    /* Если человек уже листает, заставку не запускаем вовсе. */
+    if (unlocked) return;
+    body.classList.add('playing');
+    var p = film.play();
+    if (p){
+      if (p.catch) p.catch(function(){ unlock(); });
+      /* play() асинхронный: если за время его ожидания человек
+         начал листать, останавливаем сразу после старта. */
+      if (p.then) p.then(function(){
+        if (unlocked){ try { film.pause(); } catch(e){} }
+      });
+    }
+    var watch = setInterval(function(){
+      if (unlocked || film.currentTime >= INTRO_END){ clearInterval(watch); unlock(); }
+    }, 40);
+    setTimeout(function(){ clearInterval(watch); unlock(); }, 9000);  // страховка
+  }
+
+  if (film.readyState >= 1) startIntro();
+  else {
+    film.addEventListener('loadedmetadata', startIntro, { once:true });
+    setTimeout(function(){ if(!unlocked && !duration) unlock(); }, 6000);
+  }
+  film.addEventListener('error', unlock);
+  /* длительность иногда приходит позже — без этого перемотка никогда не включится */
+  film.addEventListener('durationchange', function(){
+    if (isFinite(film.duration) && film.duration > 0) duration = film.duration;
+  });
+
+  /* ───── 2. Инерционный скролл ───── */
+  var smooth = !reduce && !touch;
+  if (!smooth) body.classList.add('native');
+
+  /* Инерция. Чем меньше число, тем дольше разгон и докат. */
+  var cur = 0, tgt = 0, ease = 0.075, docH = 0, vh = innerHeight;
+  /* Фон идёт со своей, более ленивой инерцией и отстаёт от контента —
+     это даёт глубину. Но кадр видео привязан к контенту, а не к фону:
+     иначе видео перематывается ещё долго после остановки и подтормаживает. */
+  var bgCur = 0, bgEase = 0.055, lastT = 0;
+
+  function measure(){
+    docH = page.getBoundingClientRect().height;
+    vh = innerHeight;
+    if (smooth) body.style.height = docH + 'px';
+    /* Положения слоёв считаем один раз, а не каждый кадр:
+       чтение геометрии в цикле заставляет браузер пересчитывать вёрстку. */
+    for (var i = 0; i < layers.length; i++){
+      var L = layers[i], el = L.el, y = 0;
+      while (el && el !== page){ y += el.offsetTop; el = el.offsetParent; }
+      L.mid = y + L.el.offsetHeight / 2;
+    }
+  }
+
+  /* ───── 3. Кадр: скролл двигает страницу, видео и параллакс ───── */
+  /* Частота кадров видео. Должна совпадать с fps в команде ffmpeg:
+     перематываем только когда действительно нужен другой кадр. */
+  var FPS = 30;
+  var lastSeek = -1, lastBg = '';
+
+  /* ───── Слои параллакса ───── */
+  var layers = [];
+  document.querySelectorAll('[data-par]').forEach(function(el){
+    layers.push({ el:el, k:parseFloat(el.dataset.par) || 0, mid:0, on:false, last:'' });
+  });
+  /* Двигаем только то, что сейчас видно — иначе впустую тратим кадры */
+  if ('IntersectionObserver' in window && !reduce){
+    var ioP = new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        for (var i=0;i<layers.length;i++)
+          if (layers[i].el === e.target){ layers[i].on = e.isIntersecting; break; }
+      });
+    }, { rootMargin:'45% 0px 45% 0px' });
+    layers.forEach(function(L){ ioP.observe(L.el); });
+  } else {
+    layers.forEach(function(L){ L.on = !reduce; });
+  }
+
+  function frame(){
+    tgt = scrollY || pageYOffset;
+
+    /* Инерция считается по времени, а не по кадрам: иначе на 30 Гц она
+       тянется вдвое дольше, чем на 60, а на 144 Гц обрывается вдвое быстрее. */
+    var nowT = performance.now();
+    var dt = lastT ? Math.min((nowT - lastT) / 16.667, 5) : 1;
+    lastT = nowT;
+
+    if (smooth){
+      cur += (tgt - cur) * (1 - Math.pow(1 - ease, dt));
+      if (Math.abs(tgt - cur) < 0.35) cur = tgt;
+      page.style.transform = 'translate3d(0,' + (-cur) + 'px,0)';
+    } else cur = tgt;
+
+    /* Фон со своей инерцией — отстаёт от контента и тянется за ним.
+       Отставание ограничено одним экраном: при резком прыжке по шкале
+       разделов видео иначе долго догоняет и показывает не ту сцену. */
+    bgCur += (cur - bgCur) * (1 - Math.pow(1 - bgEase, dt));
+    if (Math.abs(cur - bgCur) < 0.35) bgCur = cur;
+    var lagCap = vh * 0.95;
+    if (cur - bgCur >  lagCap) bgCur = cur - lagCap;
+    if (bgCur - cur >  lagCap) bgCur = cur + lagCap;
+
+    var max = Math.max(docH - vh, 1);
+    var p   = Math.min(Math.max(cur   / max, 0), 1);
+    var bgP = Math.min(Math.max(bgCur / max, 0), 1);
+    prog.style.transform = 'scaleX(' + p + ')';
+
+    /* Видео перематывается скроллом, начиная с 4-й секунды.
+       Ключевое для плавности: не ставить новую перемотку, пока не закончилась
+       предыдущая — очередь отменённых перемоток и даёт рывки. */
+    /* Кадр видео берётся от положения контента (p), а не фона (bgP).
+       От фона он продолжал перематываться ещё много секунд после того,
+       как колесо остановилось — именно это читалось как подтормаживание. */
+    if (unlocked && duration > INTRO_END){
+      var t = INTRO_END + p * (duration - INTRO_END - 0.05);
+      t = Math.round(t * FPS) / FPS;
+      if (t !== lastSeek && !film.seeking){
+        lastSeek = t;
+        try { film.currentTime = t; } catch(e){}
+      }
+      /* Фон наезжает и медленно уходит вверх — второй слой глубины */
+      var bg = 'translate3d(0,' + (-bgP * vh * 0.14).toFixed(1) + 'px,0) scale(' +
+               (1.09 + bgP * 0.15).toFixed(3) + ')';
+      if (bg !== lastBg){ lastBg = bg; film.style.transform = bg; }
+    }
+
+    /* Слои контента: чем дальше элемент от центра экрана,
+       тем сильнее его смещение. Геометрию не читаем — всё из кэша. */
+    if (!reduce){
+      var mid = cur + vh / 2;
+      for (var li = 0; li < layers.length; li++){
+        var Ly = layers[li];
+        if (!Ly.on) continue;
+        var off = ((Ly.mid - mid) * Ly.k).toFixed(1) + 'px';
+        if (off !== Ly.last){ Ly.last = off; Ly.el.style.setProperty('--py', off); }
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  /* Сначала обмер, потом цикл. Повторный обмер после загрузки шрифтов и фото:
+     без этого слои посчитаются по старой высоте страницы. */
+  measure();
+  addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  addEventListener('resize', measure);
+  if (window.ResizeObserver) new ResizeObserver(measure).observe(page);
+  requestAnimationFrame(frame);
+
+  /* ───── 4. Появление секций ───── */
+  var items = document.querySelectorAll('.rise, .stag, .mask, h1, h2');
+  if (!('IntersectionObserver' in window) || reduce){
+    items.forEach(function(el){ el.classList.add('seen'); el.classList.add('done'); });
+  } else {
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('seen');
+          /* После появления снимаем переход на transform: иначе параллакс
+             прогоняется через ту же секундную кривую и доезжает рывком. */
+          (function(el){ setTimeout(function(){ el.classList.add('done'); }, 1500); })(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -6% 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ───── 5. Счётчики ───── */
+  function count(el){
+    var end = parseFloat(el.dataset.n), dec = parseInt(el.dataset.d || '0', 10);
+    if (reduce){ el.textContent = end.toFixed(dec); return; }
+    var t0 = null;
+    requestAnimationFrame(function step(t){
+      if (!t0) t0 = t;
+      var k = Math.min((t - t0) / 1700, 1);
+      el.textContent = (end * (1 - Math.pow(1 - k, 4))).toFixed(dec);
+      if (k < 1) requestAnimationFrame(step);
+    });
+  }
+  var nums = document.querySelectorAll('[data-n]');
+  if ('IntersectionObserver' in window){
+    var ioN = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if (e.isIntersecting){ count(e.target); ioN.unobserve(e.target); } });
+    }, { threshold:0.6 });
+    nums.forEach(function(el){ ioN.observe(el); });
+  } else nums.forEach(count);
+
+  /* ───── 6. Активный раздел в боковой шкале ───── */
+  var links = [].slice.call(rail.querySelectorAll('a'));
+  var secs  = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if ('IntersectionObserver' in window){
+    var ioS = new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var i = secs.indexOf(e.target);
+        links.forEach(function(a,j){ a.classList.toggle('on', j === i); });
+      });
+    }, { threshold:0.35 });
+    secs.forEach(function(s){ if (s) ioS.observe(s); });
+  }
+  links.forEach(function(a){
+    a.addEventListener('click', function(ev){
+      ev.preventDefault();
+      var el = document.querySelector(a.getAttribute('href'));
+      if (!el) return;
+      var y = el.getBoundingClientRect().top + cur;
+      /* прыгаем мгновенно: плавность даёт сама инерция,
+         а два сглаживания одновременно мешают друг другу */
+      scrollTo({ top:y, behavior: smooth ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ───── 7. Магнитная кнопка ───── */
+  var mag = document.getElementById('magnet');
+  if (mag && !touch && !reduce){
+    mag.addEventListener('mousemove', function(e){
+      var r = mag.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width / 2;
+      var y = e.clientY - r.top - r.height / 2;
+      mag.style.transform = 'translate(' + x * 0.22 + 'px,' + y * 0.3 + 'px)';
+    });
+    mag.addEventListener('mouseleave', function(){ mag.style.transform = ''; });
+  }
+
+  /* ───── 8. Битые фото не оставляют дыр ───── */
+  document.querySelectorAll('.card img').forEach(function(img){
+    img.addEventListener('error', function(){
+      img.style.display = 'none';
+      img.parentElement.style.background =
+        'linear-gradient(135deg,#15181d 0%,#0e1013 100%)';
+    });
+  });
+
+  /* ───── 9. Заявка ───── */
+  var modal = document.getElementById('modal');
+  var lastFocus = null;
+
+  function openModal(ev){
+    if (ev) ev.preventDefault();
+    lastFocus = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    var first = modal.querySelector('input');
+    if (first) setTimeout(function(){ first.focus(); }, 260);
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    if (lastFocus) lastFocus.focus();
+    setTimeout(function(){ modal.classList.remove('done'); }, 700);
+  }
+
+  document.querySelectorAll('[data-open]').forEach(function(el){
+    el.addEventListener('click', openModal);
+  });
+  modal.querySelectorAll('[data-close]').forEach(function(el){
+    el.addEventListener('click', closeModal);
+  });
+  addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  document.getElementById('formSend').addEventListener('click', function(){
+    var name  = document.getElementById('fName');
+    var phone = document.getElementById('fPhone');
+    /* Демонстрационная форма: никуда не отправляет.
+       Чтобы заявки приходили, подставьте сюда свой обработчик. */
+    if (!phone.value.trim()){
+      phone.style.borderBottomColor = '#c0603a';
+      phone.focus();
+      return;
+    }
+    modal.classList.add('done');
+    name.value = ''; phone.value = '';
+    phone.style.borderBottomColor = '';
+  });
+  document.getElementById('fPhone').addEventListener('input', function(){
+    this.style.borderBottomColor = '';
+  });
+
+  /* ───── 10. Фото во весь экран ───── */
+  var lb    = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var shots = [].slice.call(document.querySelectorAll('.card'));
+  var idx = 0, lbFocus = null;
+
+  function showShot(i){
+    idx = (i + shots.length) % shots.length;
+    var fig = shots[idx];
+    var img = fig.querySelector('img');
+    var cap = fig.querySelector('figcaption');
+    lbImg.src = img.getAttribute('src');
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = cap ? cap.textContent : '';
+  }
+  function openLb(i){
+    lbFocus = document.activeElement;
+    showShot(i);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.querySelector('.lb-close').focus();
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    if (lbFocus) lbFocus.focus();
+  }
+
+  shots.forEach(function(fig, i){
+    fig.addEventListener('click', function(){ openLb(i); });
+    fig.setAttribute('tabindex','0');
+    fig.setAttribute('role','button');
+    fig.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLb(i); }
+    });
+  });
+  lb.querySelector('[data-lb-close]').addEventListener('click', closeLb);
+  lb.querySelector('[data-lb-prev]').addEventListener('click', function(e){ e.stopPropagation(); showShot(idx-1); });
+  lb.querySelector('[data-lb-next]').addEventListener('click', function(e){ e.stopPropagation(); showShot(idx+1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target === lbImg) closeLb(); });
+  addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLb();
+    if (e.key === 'ArrowLeft')  showShot(idx-1);
+    if (e.key === 'ArrowRight') showShot(idx+1);
+  });
+  /* ───── 11. Видео с YouTube по клику ───── */
+  var VIDEO_ID = 'GpFgAlpx9_s';
+  var face = document.getElementById('tubeFace');
+  if (face){
+    face.addEventListener('click', function(){
+      /* По файловому протоколу у страницы нет источника, и плеер YouTube
+         отвечает ошибкой 153. Открываем в новой вкладке. */
+      if (location.protocol === 'file:'){
+        window.open('https://youtu.be/' + VIDEO_ID, '_blank', 'noopener');
+        return;
+      }
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID +
+              '?autoplay=1&rel=0&modestbranding=1';
+      f.title = 'Видео о доме';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      face.parentElement.appendChild(f);
+      face.remove();
+    });
+  }
+})();
+</script>
+</body>
+</html>
