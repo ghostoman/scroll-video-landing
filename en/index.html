@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Золотые Кроны — таунхаус 120 м²</title>
-<meta name="description" content="Новый двухэтажный таунхаус 120 м² с собственным двором. Три спальни, тёплый пол, все коммуникации подключены.">
-<meta property="og:title" content="Золотые Кроны — таунхаус 120 м²">
-<meta property="og:description" content="Два этажа, три спальни и собственный двор. Всё уже подключено.">
-<meta property="og:image" content="video/fasad.jpg">
+<title>Golden Crowns — 1,300 sq ft townhouse</title>
+<meta name="description" content="A new two-storey townhouse with its own yard. Three bedrooms, underfloor heating, every utility already connected.">
+<meta property="og:title" content="Golden Crowns — 1,300 sq ft townhouse">
+<meta property="og:description" content="Two storeys, three bedrooms and a yard of your own. Everything is already connected.">
+<meta property="og:image" content="../video/fasad.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#08090b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 30'%3E%3Cpath d='M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z' stroke='%23ffc544' stroke-width='2.4' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="alternate" hreflang="ru" href="https://ghostoman.github.io/scroll-video-landing/">
 <link rel="alternate" hreflang="en" href="https://ghostoman.github.io/scroll-video-landing/en/">
 <link rel="alternate" hreflang="x-default" href="https://ghostoman.github.io/scroll-video-landing/">
-<link rel="preload" as="image" href="video/fasad.jpg">
-<link rel="preload" as="video" href="video/scroll.mp4" type="video/mp4">
+<link rel="preload" as="image" href="../video/fasad.jpg">
+<link rel="preload" as="video" href="../video/scroll.mp4" type="video/mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@200;300;400;500&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@ img{display:block; max-width:100%}
    Пока видео грузится, на фоне стоит фото фасада — никакого чёрного экрана. */
 .stage{
   position:fixed; inset:0; z-index:0; overflow:hidden;
-  background:#0b0d10 url("video/fasad.jpg") center/cover no-repeat;
+  background:#0b0d10 url("../video/fasad.jpg") center/cover no-repeat;
 }
 .stage video{
   width:100%; height:100%; object-fit:cover; display:block;
@@ -190,7 +190,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 
 /* маска строк */
 /* маска строк — запас снизу для выносных букв и справа для курсива:
-   наклонные буквы выходят за границу своего глифа и попадают под overflow:hidden */
+   наклонная f выходит за границу своего глифа и попадает под overflow:hidden */
 .mask{overflow:hidden; display:block; padding:0 .12em .14em 0; margin:0 -.12em -.14em 0}
 .mask > span{display:block; transform:translateY(110%); transition:transform 1.2s var(--ease)}
 .seen .mask > span, .mask.seen > span{transform:none}
@@ -568,14 +568,14 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 
 <!-- фон: прокручивается скроллом -->
 <div class="stage">
-  <video id="film" muted playsinline preload="auto" poster="video/fasad.jpg">
-    <source src="video/scroll.mp4" type="video/mp4">
+  <video id="film" muted playsinline preload="auto" poster="../video/fasad.jpg">
+    <source src="../video/scroll.mp4" type="video/mp4">
   </video>
 </div>
 
 <nav class="lang" aria-label="Language">
-  <a href="./" class="on">RU</a>
-  <a href="en/">EN</a>
+  <a href="../">RU</a>
+  <a href="./" class="on">EN</a>
 </nav>
 
 <div class="grain" aria-hidden="true"></div>
@@ -587,22 +587,22 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     <svg class="crown" width="46" height="30" viewBox="0 0 46 30" fill="none">
       <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#ffc544" stroke-width="1.2" stroke-linejoin="round"/>
     </svg>
-    <b>Золотые Кроны</b>
-    <i>Резиденция · 120 м²</i>
+    <b>Golden Crowns</b>
+    <i>Residence · 1,300 sq ft</i>
   </div>
   <div class="intro-bar"><i></i></div>
 </div>
 
 <!-- боковая шкала -->
-<nav class="rail" id="rail" aria-label="Разделы">
-  <a href="#s1"><span>Дом</span><i></i></a>
-  <a href="#s2"><span>Цифры</span><i></i></a>
-  <a href="#s3"><span>Внутри</span><i></i></a>
-  <a href="#s8"><span>Видео</span><i></i></a>
-  <a href="#s4"><span>Планировка</span><i></i></a>
-  <a href="#s5"><span>День</span><i></i></a>
-  <a href="#s6"><span>Стройка</span><i></i></a>
-  <a href="#s7"><span>Цена</span><i></i></a>
+<nav class="rail" id="rail" aria-label="Sections">
+  <a href="#s1"><span>Home</span><i></i></a>
+  <a href="#s2"><span>Numbers</span><i></i></a>
+  <a href="#s3"><span>Inside</span><i></i></a>
+  <a href="#s8"><span>Video</span><i></i></a>
+  <a href="#s4"><span>Layout</span><i></i></a>
+  <a href="#s5"><span>A day</span><i></i></a>
+  <a href="#s6"><span>Build</span><i></i></a>
+  <a href="#s7"><span>Price</span><i></i></a>
 </nav>
 
 <div class="page" id="page">
@@ -610,52 +610,52 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ЭКРАН 1 -->
   <header class="hero" id="s1">
     <div class="wrap">
-      <p class="kicker rise">Таунхаус · сдан в 2024 · первый владелец</p>
+      <p class="kicker rise">Townhouse · completed 2024 · first owner</p>
       <h1>
-        <span class="mask"><span>Дом, который</span></span>
-        <span class="mask"><span>вы себе</span></span>
-        <span class="mask"><span><em>обещали</em></span></span>
+        <span class="mask"><span>The home you</span></span>
+        <span class="mask"><span>promised</span></span>
+        <span class="mask"><span><em>yourself</em></span></span>
       </h1>
       <div class="hero-meta rise">
-        <div><b>120 м²</b><span>Площадь</span></div>
-        <div><b>2</b><span>Этажа</span></div>
-        <div><b>3</b><span>Спальни</span></div>
-        <div><b>1.7</b><span>Сотки двор</span></div>
+        <div><b>1,300</b><span>Sq ft</span></div>
+        <div><b>2</b><span>Storeys</span></div>
+        <div><b>3</b><span>Bedrooms</span></div>
+        <div><b>1,800</b><span>Yard, sq ft</span></div>
       </div>
     </div>
     <div class="hero-note rise" data-par="0.07">
-      <span class="hand">Листайте — дом<br>оживает сам</span>
+      <span class="hand">Scroll — the house<br>builds itself</span>
     </div>
   </header>
 
   <!-- БЕГУЩАЯ СТРОКА -->
   <div class="strip" aria-hidden="true">
     <div class="strip-run">
-      <span>Тёплый пол</span><i></i><span>Свой двор</span><i></i><span>Монолит</span><i></i>
-      <span>Оптоволокно</span><i></i><span>Два санузла</span><i></i><span>Терраса</span><i></i>
-      <span>Тёплый пол</span><i></i><span>Свой двор</span><i></i><span>Монолит</span><i></i>
-      <span>Оптоволокно</span><i></i><span>Два санузла</span><i></i><span>Терраса</span><i></i>
+      <span>Underfloor heating</span><i></i><span>Private yard</span><i></i><span>Solid concrete</span><i></i>
+      <span>Fibre optic</span><i></i><span>Two bathrooms</span><i></i><span>Terrace</span><i></i>
+      <span>Underfloor heating</span><i></i><span>Private yard</span><i></i><span>Solid concrete</span><i></i>
+      <span>Fibre optic</span><i></i><span>Two bathrooms</span><i></i><span>Terrace</span><i></i>
     </div>
   </div>
 
   <!-- МАНИФЕСТ -->
   <section class="sec">
     <div class="narrow rise" data-par="0.035">
-      <p class="lead">Этот разговор с собой вы откладывали не раз. Сначала нужно было закрыть другие вопросы. Потом дождаться момента. Потом ещё немного накопить.</p>
-      <p class="body">Момент выглядит примерно так: новый дом, который построили не на продажу побыстрее, а так, как строят для себя. С монолитным фундаментом, который никто не увидит. С перекрытием, о котором вы вспомните только тогда, когда наверху уснёт ребёнок, а внизу будет идти фильм.</p>
-      <p style="margin-top:34px"><span class="hand">И всё это — уже готово</span></p>
+      <p class="lead">You have put this conversation off more than once. First there were other things to settle. Then the right moment to wait for. Then a little more to save.</p>
+      <p class="body">The moment looks something like this: a new house built the way people build for themselves, not to flip quickly. With a solid foundation nobody will ever see. With a floor slab you will only think about the night a child falls asleep upstairs while a film is playing below.</p>
+      <p style="margin-top:34px"><span class="hand">And all of it is already done</span></p>
     </div>
   </section>
 
   <!-- ЦИФРЫ -->
   <section class="sec" id="s2" data-num="01">
     <div class="wrap">
-      <p class="kicker kicker--mid rise" data-par="0.025">Коротко</p>
+      <p class="kicker kicker--mid rise" data-par="0.025">At a glance</p>
       <div class="nums stag">
-        <div class="num"><b data-n="120">0</b><span>м² площадь</span></div>
-        <div class="num"><b data-n="4">0</b><span>комнаты</span></div>
-        <div class="num"><b data-n="2">0</b><span>этажа</span></div>
-        <div class="num"><b data-n="1.7" data-d="1">0</b><span>сотки участок</span></div>
+        <div class="num"><b data-n="1300">0</b><span>sq ft</span></div>
+        <div class="num"><b data-n="4">0</b><span>rooms</span></div>
+        <div class="num"><b data-n="2">0</b><span>storeys</span></div>
+        <div class="num"><b data-n="1800">0</b><span>sq ft lot</span></div>
       </div>
     </div>
   </section>
@@ -663,33 +663,33 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ГАЛЕРЕЯ -->
   <section class="sec" id="s3" data-num="02">
     <div class="wrap">
-      <p class="kicker rise" data-par="0.02">Как это выглядит</p>
-      <h2 class="rise" data-par="0.04">Дом, <em>который уже стоит</em></h2>
+      <p class="kicker rise" data-par="0.02">How it looks</p>
+      <h2 class="rise" data-par="0.04">A house <em>that already stands</em></h2>
       <div class="grid stag" style="margin-top:52px">
-        <figure class="card c-a" data-par="0.025"><img src="video/fasad.jpg" alt="Фасад" loading="lazy"><figcaption>Фасад</figcaption></figure>
-        <figure class="card c-b" data-par="0.065"><img src="video/lesnitsa.jpg" alt="Лестница" loading="lazy"><figcaption>Лестница</figcaption></figure>
-        <figure class="card c-c" data-par="0.08"><img src="video/kuhnya.jpg" alt="Кухня-гостиная" loading="lazy"><figcaption>Кухня-гостиная</figcaption></figure>
-        <figure class="card c-d" data-par="0.03"><img src="video/spalna.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
-        <figure class="card c-e" data-par="0.09"><img src="video/terassa.jpg" alt="Терраса" loading="lazy"><figcaption>Терраса</figcaption></figure>
+        <figure class="card c-a" data-par="0.025"><img src="../video/fasad.jpg" alt="Facade" loading="lazy"><figcaption>Facade</figcaption></figure>
+        <figure class="card c-b" data-par="0.065"><img src="../video/lesnitsa.jpg" alt="Staircase" loading="lazy"><figcaption>Staircase</figcaption></figure>
+        <figure class="card c-c" data-par="0.08"><img src="../video/kuhnya.jpg" alt="Kitchen-living room" loading="lazy"><figcaption>Kitchen-living room</figcaption></figure>
+        <figure class="card c-d" data-par="0.03"><img src="../video/spalna.jpg" alt="Bedroom" loading="lazy"><figcaption>Bedroom</figcaption></figure>
+        <figure class="card c-e" data-par="0.09"><img src="../video/terassa.jpg" alt="Terrace" loading="lazy"><figcaption>Terrace</figcaption></figure>
       </div>
-      <p class="body rise" style="margin-top:26px; font-size:14px; color:var(--dim)">Нажмите на любое фото, чтобы открыть во весь экран</p>
+      <p class="body rise" style="margin-top:26px; font-size:14px; color:var(--dim)">Click any photo to open it full screen</p>
     </div>
   </section>
 
   <!-- ВИДЕО О ДОМЕ -->
   <section class="sec" id="s8" data-num="03">
     <div class="wrap">
-      <p class="kicker rise" data-par="0.02">Видео о доме</p>
-      <h2 class="rise" data-par="0.04">Посмотрите <em>за минуту</em></h2>
+      <p class="kicker rise" data-par="0.02">Video tour</p>
+      <h2 class="rise" data-par="0.04">See it <em>in a minute</em></h2>
       <div class="tube rise" data-par="0.05" style="margin-top:44px">
-        <button class="tube-face" id="tubeFace" type="button" aria-label="Смотреть видео о доме"
+        <button class="tube-face" id="tubeFace" type="button" aria-label="Watch the video tour"
                 style="background-image:url('https://i.ytimg.com/vi/GpFgAlpx9_s/maxresdefault.jpg')">
           <span class="tube-play">
             <svg width="26" height="30" viewBox="0 0 24 28" fill="#ffc544" aria-hidden="true">
               <path d="M2 2v24l20-12z"/>
             </svg>
           </span>
-          <span class="tube-label">Смотреть видео</span>
+          <span class="tube-label">Watch the video</span>
         </button>
       </div>
     </div>
@@ -698,16 +698,16 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ПЛАНИРОВКА -->
   <section class="sec" id="s4" data-num="04">
     <div class="wrap">
-      <p class="kicker rise" data-par="0.02">Планировка</p>
-      <h2 class="rise" data-par="0.04">Сто двадцать метров, <em>где нет лишних</em></h2>
-      <p class="body rise" style="max-width:560px">Ни одного коридора в никуда. Каждый метр из ста двадцати делает работу, за которую вы платите.</p>
+      <p class="kicker rise" data-par="0.02">Layout</p>
+      <h2 class="rise" data-par="0.04">Thirteen hundred square feet, <em>with nothing wasted</em></h2>
+      <p class="body rise" style="max-width:560px">Not one corridor leading nowhere. Every square foot does the job you are paying for.</p>
       <div class="rooms stag" style="margin-top:52px">
-        <div class="rm"><em>01</em><b>Три спальни</b><span>Две наверху и одна внизу — под кабинет, гостевую или комнату для родителей. Не придётся выбирать, кому тесниться.</span></div>
-        <div class="rm"><em>02</em><b>Два санузла</b><span>По одному на этаж. Утро перестаёт быть очередью, а гости — неудобством.</span></div>
-        <div class="rm"><em>03</em><b>Кухня-гостиная с террасой</b><span>Единое светлое пространство, которое летом просто продолжается во двор. Стол на двенадцать человек помещается.</span></div>
-        <div class="rm"><em>04</em><b>Кладовая</b><span>Отдельное помещение под велосипеды, мотоцикл, коляски и всё, чему не место в жилых комнатах.</span></div>
-        <div class="rm"><em>05</em><b>Свой двор 1.7 сотки</b><span>Приватизированный участок с забором по периметру. Мангал, качели, грядки — как решите.</span></div>
-        <div class="rm"><em>06</em><b>Монолитная лестница</b><span>Дизайнерская, железобетонная, ручной работы. Не времянка, которую через год меняют.</span></div>
+        <div class="rm"><em>01</em><b>Three bedrooms</b><span>Two upstairs and one on the ground floor — for an office, guests or parents. Nobody has to be the one who squeezes in.</span></div>
+        <div class="rm"><em>02</em><b>Two bathrooms</b><span>One per floor. Mornings stop being a queue, and guests stop being an inconvenience.</span></div>
+        <div class="rm"><em>03</em><b>Kitchen-living room with terrace</b><span>One bright open space that simply continues into the yard in summer. A table for twelve fits.</span></div>
+        <div class="rm"><em>04</em><b>Storage room</b><span>A separate room for bikes, a motorcycle, strollers and everything that has no place in a living room.</span></div>
+        <div class="rm"><em>05</em><b>Private yard, 1,800 sq ft</b><span>A titled lot fenced on every side. Grill, swings, garden beds — your call.</span></div>
+        <div class="rm"><em>06</em><b>Cast concrete staircase</b><span>Designed and hand-finished in reinforced concrete. Not the temporary kind you replace within a year.</span></div>
       </div>
     </div>
   </section>
@@ -716,16 +716,16 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <section class="sec" id="s5" data-num="05">
     <div class="wrap day-wrap">
       <div class="day-stick rise" data-par="0.03">
-        <p class="kicker">Один день</p>
-        <h2>Дом продают метрами.<br><em>Живут в нём иначе</em></h2>
-        <p style="margin-top:24px"><span class="hand">Представьте вторник</span></p>
+        <p class="kicker">One day here</p>
+        <h2>Houses are sold by the square foot.<br><em>Living in one is another matter</em></h2>
+        <p style="margin-top:24px"><span class="hand">Picture a Tuesday</span></p>
       </div>
       <dl class="hours stag">
-        <div class="hr"><dt>07:20</dt><dd>Босиком по <b>тёплому полу</b> на кухню. Он смонтирован по всему первому этажу — вопрос тапочек зимой снимается навсегда.</dd></div>
-        <div class="hr"><dt>09:00</dt><dd>Работа из дальней комнаты. <b>Оптоволокно заведено в дом</b>, созвоны не рассыпаются, и никто не ходит через кадр.</dd></div>
-        <div class="hr"><dt>13:30</dt><dd>Обед на <b>террасе</b> с выходом прямо из кухни. Свой двор, забор по периметру, ни одного чужого окна напротив.</dd></div>
-        <div class="hr"><dt>19:00</dt><dd>Ужин на всех в <b>единой кухне-гостиной</b>, а не на шести метрах, где двое уже не расходятся.</dd></div>
-        <div class="hr"><dt>23:00</dt><dd>Наверху две спальни и свой санузел. <b>Монолитное перекрытие</b> — внизу можно досматривать фильм, никто не проснётся.</dd></div>
+        <div class="hr"><dt>07:20</dt><dd>Barefoot across the <b>heated floor</b> to the kitchen. It runs through the whole ground floor, so winter slippers stop being a question.</dd></div>
+        <div class="hr"><dt>09:00</dt><dd>Working from the back room. <b>Fibre optic is wired into the house</b>, calls do not fall apart, and nobody walks through the frame.</dd></div>
+        <div class="hr"><dt>13:30</dt><dd>Lunch on the <b>terrace</b> , straight out from the kitchen. Your own yard, fenced all round, not one window looking back at you.</dd></div>
+        <div class="hr"><dt>19:00</dt><dd>Dinner for everyone in the <b>open kitchen-living room</b>, not in sixty square feet where two people cannot pass each other.</dd></div>
+        <div class="hr"><dt>23:00</dt><dd>Two bedrooms and their own bathroom upstairs. <b>A solid concrete floor slab</b> — you can finish the film downstairs and nobody wakes up.</dd></div>
       </dl>
     </div>
   </section>
@@ -733,20 +733,20 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ПАСПОРТ -->
   <section class="sec" id="s6" data-num="06">
     <div class="wrap">
-      <p class="kicker rise" data-par="0.02">Как построен</p>
-      <h2 class="rise" data-par="0.04">То, что <em>не видно</em> на фотографиях</h2>
-      <p class="body rise" style="max-width:600px">Отделку можно переделать за месяц. Всё остальное переделать нельзя. Здесь это уже сделано — и сделано правильно.</p>
+      <p class="kicker rise" data-par="0.02">How it was built</p>
+      <h2 class="rise" data-par="0.04">What you <em>cannot see</em> in the photos</h2>
+      <p class="body rise" style="max-width:600px">Finishes can be redone in a month. Everything else cannot be redone at all. Here it is already done, and done properly.</p>
       <dl class="spec rise" style="margin-top:52px">
-        <div class="sp"><dt>Фундамент</dt><dd>Ленточный монолитный, гидроизолирован и утеплён. Залита монолитная плита с коммуникациями.</dd></div>
-        <div class="sp"><dt>Стены</dt><dd>Красный кирпич с утеплением базальтовой ватой. Не газоблок, не каркас.</dd></div>
-        <div class="sp"><dt>Фасад</dt><dd>Окрашен системой Ceresit, силикон-силикат. Не выгорает и не требует ухода годами.</dd></div>
-        <div class="sp"><dt>Кровля</dt><dd>Современная ПВХ-мембрана, смонтирован водосток.</dd></div>
-        <div class="sp"><dt>Перекрытие</dt><dd>Монолитное железобетонное между первым и вторым этажом.</dd></div>
-        <div class="sp"><dt>Окна</dt><dd>Энергосберегающие, ламинированный профиль, защитное напыление на стёклах.</dd></div>
-        <div class="sp"><dt>Отопление</dt><dd>Индивидуальное. Двухконтурный газовый котёл установлен, тёплый пол смонтирован.</dd></div>
-        <div class="sp"><dt>Под отделку</dt><dd>Машинная штукатурка стен, электрика разведена по всему дому.</dd></div>
-        <div class="sp"><dt>Коммуникации</dt><dd>Газ · электрика 380 В · центральный водопровод · центральная канализация · оптоволокно</dd></div>
-        <div class="sp"><dt>Год</dt><dd>2024. Первый владелец — вы.</dd></div>
+        <div class="sp"><dt>Foundation</dt><dd>Poured strip foundation, waterproofed and insulated, with a solid slab and utilities cast in.</dd></div>
+        <div class="sp"><dt>Walls</dt><dd>Red brick with mineral wool insulation. Not aerated block, not timber frame.</dd></div>
+        <div class="sp"><dt>Facade</dt><dd>Finished with a Ceresit silicone-silicate system. It does not fade and needs no upkeep for years.</dd></div>
+        <div class="sp"><dt>Roof</dt><dd>Modern PVC membrane with guttering installed.</dd></div>
+        <div class="sp"><dt>Floor slab</dt><dd>Solid reinforced concrete between the ground and first floor.</dd></div>
+        <div class="sp"><dt>Windows</dt><dd>Energy-efficient, laminated frames, protective coating on the glass.</dd></div>
+        <div class="sp"><dt>Heating</dt><dd>Independent. Combi gas boiler installed, underfloor heating laid.</dd></div>
+        <div class="sp"><dt>Ready to finish</dt><dd>Machine-applied plaster throughout, electrics run to every room.</dd></div>
+        <div class="sp"><dt>Utilities</dt><dd>Gas · three-phase power · mains water · mains sewerage · fibre optic</dd></div>
+        <div class="sp"><dt>Year</dt><dd>2024. You would be the first owner.</dd></div>
       </dl>
     </div>
   </section>
@@ -754,11 +754,11 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ПОЧЕМУ СЕЙЧАС -->
   <section class="sec">
     <div class="wrap">
-      <p class="kicker kicker--mid rise" data-par="0.02">Три причины не откладывать</p>
+      <p class="kicker kicker--mid rise" data-par="0.02">Three reasons not to wait</p>
       <div class="why stag" style="margin-top:44px">
-        <div class="wh"><b>Чистый лист вместо чужого вкуса</b><span>Дом под чистовую отделку. Не придётся сдирать чужую плитку и жить внутри решений предыдущего хозяина. Вы доведёте его ровно до того вида, который представляли.</span></div>
-        <div class="wh"><b>Всё подключено</b><span>Газ, свет, вода, канализация, интернет — заведены и работают. Ни одного согласования, ни одной очереди, ни одного месяца ожидания.</span></div>
-        <div class="wh"><b>Документы готовы</b><span>Объект проверен, продажа напрямую от представителя застройщика. Сделка занимает дни, а не сезон.</span></div>
+        <div class="wh"><b>A clean slate instead of someone else’s taste</b><span>The house is ready for final finishes. No tearing out someone else’s tile, no living inside the previous owner’s decisions. You take it exactly where you pictured it.</span></div>
+        <div class="wh"><b>Everything is connected</b><span>Gas, power, water, sewerage and internet are in and working. No approvals, no queues, no months of waiting.</span></div>
+        <div class="wh"><b>Paperwork is ready</b><span>The property is verified and sold directly by the developer’s representative. The deal takes days, not a season.</span></div>
       </div>
     </div>
   </section>
@@ -766,27 +766,27 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   <!-- ЦЕНА -->
   <section class="sec" id="s7">
     <div class="price-box narrow rise" data-par="0.055">
-      <p class="kicker kicker--mid">Цена</p>
-      <p class="price" data-v="$160 000">$160 000</p>
-      <p class="price-sub">$1 333 за м² · дом целиком, с участком</p>
+      <p class="kicker kicker--mid">Price</p>
+      <p class="price" data-v="$260,000">$260,000</p>
+      <p class="price-sub">$200 per sq ft · the whole house, land included</p>
       <div style="margin-top:8px">
-        <a class="cta" id="magnet" href="#" data-open>Записаться на просмотр</a>
+        <a class="cta" id="magnet" href="#" data-open>Book a viewing</a>
       </div>
-      <div><a class="ghost" href="#" data-open>Задать вопрос</a></div>
-      <p class="fine">Показ по предварительной записи · объект проверен</p>
+      <div><a class="ghost" href="#" data-open>Ask a question</a></div>
+      <p class="fine">Viewings by appointment · property verified</p>
     </div>
   </section>
 
   <!-- КОНТАКТЫ АВТОРА САЙТА -->
   <section class="author rise">
-    <h3>Нужен <em>такой же</em> сайт или видеореклама?</h3>
-    <p>Делаю сайты со скролл-видео и рекламные ролики под ключ — для недвижимости, товаров и услуг. Напишите, обсудим задачу.</p>
+    <h3>Want <em>the same kind of</em> site or video ad?</h3>
+    <p>I build scroll-video sites and ad films end to end — for real estate, products and services. Get in touch and let’s talk it through.</p>
     <div class="author-links">
       <a href="https://t.me/ghostoman" target="_blank" rel="noreferrer">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.3-.5.5-1 .5l.3-4.7L18.2 6c.4-.3-.1-.5-.6-.2L6.9 12.6l-4.5-1.4c-1-.3-1-1 .2-1.4l17.6-6.8c.8-.3 1.5.2 1.2 1.3z"/>
         </svg>
-        Телеграм @ghostoman
+        Telegram @ghostoman
       </a>
       <a href="mailto:bannermru@gmail.com">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
@@ -801,18 +801,18 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     <svg class="crown" width="34" height="22" viewBox="0 0 46 30" fill="none">
       <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#b8862a" stroke-width="1.2" stroke-linejoin="round"/>
     </svg>
-    <p>Золотые Кроны · таунхаус 120 м²</p>
-    <p>Характеристики указаны по данным застройщика</p>
+    <p>Golden Crowns · 1,300 sq ft townhouse</p>
+    <p>Specifications as provided by the developer</p>
   </footer>
 
 </div>
 
 <!-- ФОТО ВО ВЕСЬ ЭКРАН -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото" aria-hidden="true">
-  <button class="lb-close" type="button" data-lb-close aria-label="Закрыть">&times;</button>
-  <button class="lb-nav lb-prev" type="button" data-lb-prev aria-label="Предыдущее фото">&#8249;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+  <button class="lb-close" type="button" data-lb-close aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" type="button" data-lb-prev aria-label="Previous photo">&#8249;</button>
   <img id="lbImg" src="" alt="">
-  <button class="lb-nav lb-next" type="button" data-lb-next aria-label="Следующее фото">&#8250;</button>
+  <button class="lb-nav lb-next" type="button" data-lb-next aria-label="Next photo">&#8250;</button>
   <div class="lb-cap" id="lbCap"></div>
 </div>
 
@@ -820,38 +820,38 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
   <div class="modal-bg" data-close></div>
   <div class="modal-box">
-    <button class="modal-close" type="button" data-close aria-label="Закрыть">&times;</button>
+    <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
 
     <div class="form-part">
-      <h3 id="modalTitle">Посмотреть <em>вживую</em></h3>
-      <p class="sub">Оставьте контакты — свяжемся и подберём удобное время. Показ занимает около получаса.</p>
+      <h3 id="modalTitle">See it <em>in person</em></h3>
+      <p class="sub">Leave your details and we will find a time that suits you. A viewing takes about half an hour.</p>
       <div class="field">
-        <label for="fName">Как к вам обращаться</label>
-        <input id="fName" type="text" placeholder="Имя" autocomplete="name">
+        <label for="fName">Your name</label>
+        <input id="fName" type="text" placeholder="Name" autocomplete="name">
       </div>
       <div class="field">
-        <label for="fPhone">Телефон</label>
+        <label for="fPhone">Phone</label>
         <input id="fPhone" type="tel" placeholder="+__ ___ ___ __ __" autocomplete="tel">
       </div>
       <div class="field">
-        <label for="fWhen">Когда удобно</label>
+        <label for="fWhen">When suits you</label>
         <select id="fWhen">
-          <option>В ближайшие дни</option>
-          <option>На выходных</option>
-          <option>Вечером после работы</option>
-          <option>Пока просто задать вопрос</option>
+          <option>In the next few days</option>
+          <option>At the weekend</option>
+          <option>Evenings after work</option>
+          <option>Just a question for now</option>
         </select>
       </div>
-      <button class="cta" type="button" id="formSend">Отправить заявку</button>
-      <p class="modal-fine">Перезвоним в течение дня. Никаких рассылок.</p>
+      <button class="cta" type="button" id="formSend">Send request</button>
+      <p class="modal-fine">We will call back the same day. No mailing lists.</p>
     </div>
 
     <div class="thanks">
       <svg class="crown" width="46" height="30" viewBox="0 0 46 30" fill="none">
         <path d="M3 27h40M4 24 2 8l10 7L23 2l11 13 10-7-2 16H4Z" stroke="#ffc544" stroke-width="1.2" stroke-linejoin="round"/>
       </svg>
-      <h3>Заявка <em>принята</em></h3>
-      <p class="sub" style="margin-bottom:0">Свяжемся с вами в течение дня и договоримся о показе.</p>
+      <h3>Request <em>received</em></h3>
+      <p class="sub" style="margin-bottom:0">We will be in touch today to arrange the viewing.</p>
     </div>
   </div>
 </div>
@@ -1008,7 +1008,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     var bgP = Math.min(Math.max(bgCur / max, 0), 1);
     prog.style.transform = 'scaleX(' + p + ')';
 
-    /* Видео перематывается скроллом, начиная с 4-й секунды.
+    /* Video перематывается скроллом, начиная с 4-й секунды.
        Ключевое для плавности: не ставить новую перемотку, пока не закончилась
        предыдущая — очередь отменённых перемоток и даёт рывки. */
     /* Кадр видео берётся от положения контента (p), а не фона (bgP).
@@ -1078,7 +1078,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     requestAnimationFrame(function step(t){
       if (!t0) t0 = t;
       var k = Math.min((t - t0) / 1700, 1);
-      el.textContent = (end * (1 - Math.pow(1 - k, 4))).toFixed(dec);
+      el.textContent = (end*(1-Math.pow(1-k,4))).toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       if (k < 1) requestAnimationFrame(step);
     });
   }
@@ -1136,7 +1136,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     });
   });
 
-  /* ───── 9. Заявка ───── */
+  /* ───── 9. Request ───── */
   var modal = document.getElementById('modal');
   var lastFocus = null;
 
@@ -1230,7 +1230,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     if (e.key === 'ArrowLeft')  showShot(idx-1);
     if (e.key === 'ArrowRight') showShot(idx+1);
   });
-  /* ───── 11. Видео с YouTube по клику ───── */
+  /* ───── 11. Video с YouTube по клику ───── */
   var VIDEO_ID = 'GpFgAlpx9_s';
   var face = document.getElementById('tubeFace');
   if (face){
@@ -1244,7 +1244,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID +
               '?autoplay=1&rel=0&modestbranding=1';
-      f.title = 'Видео о доме';
+      f.title = 'Video tour';
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       f.allowFullscreen = true;
       face.parentElement.appendChild(f);
