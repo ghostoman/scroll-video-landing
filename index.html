@@ -15,7 +15,6 @@
 <link rel="alternate" hreflang="en" href="https://ghostoman.github.io/scroll-video-landing/en/">
 <link rel="alternate" hreflang="x-default" href="https://ghostoman.github.io/scroll-video-landing/">
 <link rel="preload" as="image" href="video/fasad.jpg">
-<link rel="preload" as="video" href="video/scroll.mp4" type="video/mp4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@200;300;400;500&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -29,13 +28,13 @@
   --cream:#f2ede3;
   --mute:#c3bcae;
   --dim:#8a8377;
-  /* золото */
-  --gold:#ffc544;
-  --gold-lt:#ffe9a8;
-  --gold-dk:#b8862a;
-  --gold-line:rgba(255,197,68,.22);
-  --gold-glow:rgba(255,197,68,.14);
-  --gold-grad:linear-gradient(135deg,#ffeeb8 0%,#ffc544 44%,#b8862a 100%);
+  /* золото — приглушённое, ближе к латуни, чем к неону */
+  --gold:#d9ad63;
+  --gold-lt:#f0dcb0;
+  --gold-dk:#9c7433;
+  --gold-line:rgba(217,173,99,.20);
+  --gold-glow:rgba(217,173,99,.12);
+  --gold-grad:linear-gradient(135deg,#f2e2ba 0%,#d9ad63 46%,#9c7433 100%);
 
   --serif:'Playfair Display',Georgia,serif;
   --sans:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -160,8 +159,8 @@ body.native .page{position:static; transform:none !important}
   position:absolute; right:3vw; top:6vh; z-index:-1;
   font-family:var(--serif); font-size:clamp(120px,20vw,300px); line-height:.8;
   font-weight:400; color:transparent; pointer-events:none;
-  -webkit-text-stroke:1px rgba(255,197,68,.11);
-  text-stroke:1px rgba(255,197,68,.11);
+  -webkit-text-stroke:1px rgba(217,173,99,.11);
+  text-stroke:1px rgba(217,173,99,.11);
 }
 
 .kicker{
@@ -323,7 +322,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 .sp{display:grid; grid-template-columns:250px 1fr; gap:34px; padding:24px 14px;
   border-bottom:1px solid var(--gold-line);
   transition:background .5s var(--ease), padding-left .5s var(--ease)}
-.sp:hover{background:rgba(255,197,68,.05); padding-left:26px}
+.sp:hover{background:rgba(217,173,99,.05); padding-left:26px}
 .sp dt{margin:0; font-family:var(--mono); font-size:9px; letter-spacing:.22em;
   text-transform:uppercase; color:var(--gold); padding-top:5px}
 .sp dd{margin:0; font-size:16px; line-height:1.65; color:var(--cream)}
@@ -510,8 +509,39 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   border:1px solid var(--gold-line); border-radius:999px; padding:15px 30px;
   transition:border-color .45s var(--ease), color .45s var(--ease), background .45s var(--ease);
 }
-.author-links a:hover{border-color:var(--gold); color:var(--gold); background:rgba(255,197,68,.06)}
+.author-links a:hover{border-color:var(--gold); color:var(--gold); background:rgba(217,173,99,.06)}
 .author-links svg{flex:0 0 auto}
+
+/* ═══════════ ИНДИКАТОР ЗАГРУЗКИ ВИДЕО ═══════════
+   Без него на медленном интернете человек не понимает, что происходит. */
+.loader{
+  position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+  z-index:11; display:flex; align-items:center; gap:12px;
+  font-family:var(--mono); font-size:9px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--dim);
+  opacity:0; pointer-events:none; transition:opacity .6s var(--ease);
+}
+.loader.on{opacity:1}
+.loader i{
+  display:block; width:120px; height:1px; background:rgba(242,237,227,.14);
+  position:relative; overflow:hidden;
+}
+.loader i b{
+  position:absolute; inset:0; transform-origin:0 50%; transform:scaleX(0);
+  background:var(--gold-grad); display:block; transition:transform .4s linear;
+}
+
+/* ═══════════ ОБЛЕГЧЁННЫЙ РЕЖИМ ═══════════
+   Слабое устройство или медленная связь: видео не грузится вообще,
+   остаётся фотография и медленный наезд. Сайт остаётся цельным. */
+.lite .stage video{display:none}
+.lite .stage{
+  background-size:cover;
+  animation:slowzoom 34s ease-in-out infinite alternate;
+}
+@keyframes slowzoom{from{background-size:104%}to{background-size:118%}}
+.lite .grain{display:none}
+.lite .sec[data-num]::before{display:none}
 
 /* ═══════════ ПОДВАЛ ═══════════ */
 .foot{padding:9vh 28px 12vh; border-top:1px solid var(--gold-line);
@@ -568,9 +598,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 
 <!-- фон: прокручивается скроллом -->
 <div class="stage">
-  <video id="film" muted playsinline preload="auto" poster="video/fasad.jpg">
-    <source src="video/scroll.mp4" type="video/mp4">
-  </video>
+  <video id="film" muted playsinline preload="none" poster="video/fasad.jpg" data-src="video/scroll.mp4"></video>
 </div>
 
 <nav class="lang" aria-label="Language">
@@ -580,6 +608,7 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
 
 <div class="grain" aria-hidden="true"></div>
 <div class="prog" id="prog" aria-hidden="true"></div>
+<div class="loader" id="loader" aria-hidden="true"><span>Загрузка</span><i><b id="loaderBar"></b></i></div>
 
 <!-- заставка -->
 <div class="intro-lock" id="introLock" aria-hidden="true">
@@ -870,6 +899,30 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
   var duration  = 0;
   var unlocked  = false;
 
+  /* ───── 0. Может ли устройство вообще тянуть скролл-видео ─────
+     Видео весит десятки мегабайт и требует декодирования каждый кадр.
+     На слабом телефоне или медленной связи это хуже, чем отсутствие эффекта:
+     человек ждёт минуту и уходит. Лучше честно отдать статичную версию. */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var slowNet = false, weakDevice = false;
+
+  if (conn){
+    var et = conn.effectiveType || '';
+    slowNet = conn.saveData === true ||
+              et === 'slow-2g' || et === '2g' || et === '3g' ||
+              (typeof conn.downlink === 'number' && conn.downlink > 0 && conn.downlink < 2.5);
+  }
+  if (navigator.deviceMemory && navigator.deviceMemory <= 2) weakDevice = true;
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) weakDevice = true;
+
+  var LITE = reduce || slowNet || weakDevice;
+  if (LITE){
+    body.classList.add('lite');
+    body.classList.add('booted');
+    unlocked = true;
+    body.classList.add('unlocked');
+  }
+
   /* знак на чёрном — сразу, ещё до загрузки видео */
   requestAnimationFrame(function(){ body.classList.add('booted'); });
 
@@ -920,17 +973,64 @@ h2 em{font-style:italic; padding-right:.06em; background:var(--gold-grad);
     setTimeout(function(){ clearInterval(watch); unlock(); }, 9000);  // страховка
   }
 
-  if (film.readyState >= 1) startIntro();
-  else {
+  if (LITE){
+    /* Облегчённый режим: видео не грузим вовсе. */
+    film.removeAttribute('poster');
+  } else if (film.readyState >= 1) {
+    startIntro();
+  } else {
+    /* Источник подключается вручную — только после того, как решено,
+       что устройство его потянет. До этого браузер не скачал ни байта. */
+    var src = document.createElement('source');
+    src.src = film.dataset.src || 'video/scroll.mp4';
+    src.type = 'video/mp4';
+    film.appendChild(src);
+    film.preload = 'auto';
+    film.load();
+
+    /* Индикатор появляется только если загрузка затянулась больше секунды:
+       на быстром интернете он мелькнёт и только отвлечёт. */
+    var loader = document.getElementById('loader');
+    var bar    = document.getElementById('loaderBar');
+    var shown  = false;
+    var showTimer = setTimeout(function(){
+      if (!duration){ loader.classList.add('on'); shown = true; }
+    }, 1200);
+
+    function progress(){
+      if (!bar || !film.buffered || !film.buffered.length) return;
+      var end = film.buffered.end(film.buffered.length - 1);
+      var total = film.duration || 0;
+      if (total > 0) bar.style.transform = 'scaleX(' + Math.min(end / total, 1) + ')';
+    }
+    film.addEventListener('progress', progress);
+    film.addEventListener('loadedmetadata', progress);
+
+    function hideLoader(){
+      clearTimeout(showTimer);
+      if (shown) loader.classList.remove('on');
+    }
+    film.addEventListener('canplay', hideLoader, { once:true });
+
     film.addEventListener('loadedmetadata', startIntro, { once:true });
-    setTimeout(function(){ if(!unlocked && !duration) unlock(); }, 6000);
+
+    /* Если за 12 секунд видео так и не пошло — связь хуже, чем обещал браузер.
+       Переключаемся на статику, чтобы не держать человека в ожидании. */
+    setTimeout(function(){
+      if (!duration){
+        hideLoader();
+        film.removeAttribute('src');
+        film.innerHTML = '';
+        body.classList.add('lite');
+        unlock();
+      }
+    }, 12000);
   }
   film.addEventListener('error', unlock);
   /* длительность иногда приходит позже — без этого перемотка никогда не включится */
   film.addEventListener('durationchange', function(){
     if (isFinite(film.duration) && film.duration > 0) duration = film.duration;
   });
-
   /* ───── 2. Инерционный скролл ───── */
   var smooth = !reduce && !touch;
   if (!smooth) body.classList.add('native');
